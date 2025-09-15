@@ -34,7 +34,7 @@ const userSchema = new Schema(
             type:String,            ///Storing the url
             required:true
         },
-        coverimage:{
+        coverImage:{
             type:String,
             required:false 
         },
@@ -44,7 +44,7 @@ const userSchema = new Schema(
                 ref:"Video"
             }
         ],
-        refreshtoken:{
+        refreshToken:{
             type:String,
         }
     },
@@ -53,7 +53,7 @@ const userSchema = new Schema(
 
 userSchema.pre('save',async function(next){
     if(!this.isModified("password")) return next()
-    this.password = brcypt.hash(this.password,12)
+    this.password = await brcypt.hash(this.password,12)
     next()
 })
 
@@ -91,4 +91,4 @@ userSchema.methods.generateRefreshToken = function (){
     )
 }
 
-export const user = mongoose.model("User",userSchema)
+export const User = mongoose.model("User",userSchema)
