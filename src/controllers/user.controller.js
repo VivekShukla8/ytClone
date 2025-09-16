@@ -7,10 +7,11 @@ import { ApiResponse } from "../utils/apiResponse.js";
 const generateAccessAndRefreshAccessTokens = async(userId) => {
     try {
         const user = await User.findById(userId)
+        if (!user) throw new APIerror(404, "User not found");
         const accessToken = user.generateAccessToken();
         const refreshToken = user.generateRefreshToken();
 
-        user.refreshToken=refreshToken
+        user.refreshToken = refreshToken
         await user.save({validateBeforeSave:false})
 
         return {accessToken,refreshToken}
@@ -110,9 +111,10 @@ const loginUser = asyncHandler( async (req,res) => {
     const {username,email,password} = req.body;
 
     // step 2->
-    if(!username || !email){
-        throw new APIerror(400,"username or email is required")
+    if (!(username || email)) {
+        throw new APIerror(400, "username or email is required");
     }
+
 
     // step 3->
     const user = await User.findOne({
