@@ -1,7 +1,6 @@
 import mongoose ,{Mongoose, Schema} from "mongoose";
 import jwt from "jsonwebtoken"
 import brcypt from "bcrypt"
-import { use } from "react";
 
 const userSchema = new Schema(
     {
@@ -36,7 +35,6 @@ const userSchema = new Schema(
         },
         coverImage:{
             type:String,
-            required:false 
         },
         watchHistory:[
             {
@@ -80,9 +78,9 @@ userSchema.methods.generateRefreshToken = function (){
     return jwt.sign(
         {
             _id:this._id,
-            email:this.email,
-            username:this.username,
-            fullname:this.fullname
+            // email:this.email,
+            // username:this.username,
+            // fullname:this.fullname
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
