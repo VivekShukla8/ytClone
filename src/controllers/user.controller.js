@@ -277,7 +277,7 @@ const updateAccount = asyncHandler(async(req,res)=>{
         throw new APIerror(400,"All fields are required")
     }
 
-    const user = User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set:{
@@ -310,7 +310,7 @@ const updateUserAvatar = asyncHandler(async(req,res)=>{
         throw new APIerror(404,"Error while uploading avatar on cloudinary")
     }
 
-    const user = User.findByIdAndUpdate(req.user._id,
+    const user = await User.findByIdAndUpdate(req.user._id,
         {
             $set:{
                 avatar:avatar.url
