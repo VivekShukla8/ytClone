@@ -1,12 +1,14 @@
 import mongoose, { isValidObjectId } from "mongoose"
-import { Video } from "../models/video.model.js"
-import { User } from "../models/user.models.js"
+import { Video } from "../models/video.models.js"
 import APIerror from "../utils/apiError.js"
 import { ApiResponse } from "../utils/apiResponse.js"
-import { asyncHandler } from "../utils/asyncHandler.js"
+import asyncHandler from "../utils/asyncHandler.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { v2 as cloudinary } from "cloudinary"
 import fs from "fs"
+import multer from "multer";
+
+const upload = multer({ dest: "uploads/" });
 
 const getAllVideos = asyncHandler(async (req, res) => {
     let { page = 1, limit = 10, query, sortBy = "createdAt", sortType = "desc", userId } = req.query;
@@ -120,7 +122,7 @@ const uploadVideo = asyncHandler(async (req, res) => {
             resource_type: "image",
             folder: "thumbnails"
         })
-        fs.unlinkSync(thumbnailFile.path); // cleanup local
+        
     } catch (error) {
         throw new APIerror(500, error?.message || "Error while uploading thumbnail image");
     }
@@ -130,7 +132,7 @@ const uploadVideo = asyncHandler(async (req, res) => {
             resource_type: "video",
             folder: "videos"
         })
-        fs.unlinkSync(videoFile.path); // cleanup local
+        
     } catch (error) {
         throw new APIerror(500, error?.message || "Error while uploading video file");
     }
