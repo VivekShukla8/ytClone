@@ -30,6 +30,6 @@ router.route("/update-details").patch(verifyJWT,updateAccount)
 router.route("/change-avatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 router.route("/change-coverImage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
-router.route("watchHistory").get(verifyJWT,getWatchHistory)
+router.route("/watchHistory").get(verifyJWT,getWatchHistory)
 
 export default router

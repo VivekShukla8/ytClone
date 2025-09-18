@@ -5,12 +5,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken"
 import fs from "fs";
-import { lookup } from "dns";
-import { subscribe } from "diagnostics_channel";
-import { emit } from "process";
-import { create } from "domain";
 import mongoose from "mongoose";
-import { use } from "react";
 
 const generateAccessAndRefreshAccessTokens = async(userId) => {
     try {
@@ -278,7 +273,7 @@ const getCurrentUser = asyncHandler(async(req,res)=>{
 })
 
 const updateAccount = asyncHandler(async(req,res)=>{
-    const {fullname,email} = req.body
+    const {fullname,email} = req.body;  
 
     if(!fullname || !email){
         throw new APIerror(400,"All fields are required")
@@ -312,9 +307,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
-
-    // cleanup local file
-    fs.unlinkSync(avatarLocalPath);
 
     if (!avatar?.url) {
         throw new APIerror(500, "Error while uploading avatar on cloudinary");
