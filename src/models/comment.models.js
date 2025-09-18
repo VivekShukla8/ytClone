@@ -1,5 +1,4 @@
 import mongoose ,{Mongoose, Schema} from "mongoose";
-import jwt from "jsonwebtoken"
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const commentSchema = new Schema(
