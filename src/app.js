@@ -36,4 +36,20 @@ app.use("/api/v1/tweets",tweetRouter)
 import subscriptionRouter from "./routes/subscription.routes.js"
 app.use("/api/v1/subscriptions",subscriptionRouter)
 
+// Likes routes
+import likesRouter from "./routes/likes.routes.js";
+app.use("/api/v1/likes", likesRouter);
+
+// Healthcheck route
+import healthcheckRouter from "./routes/healthcheck.routes.js";
+app.use("/api/v1/healthcheck", healthcheckRouter);
+
+// Playlist routes
+import playlistRouter from "./routes/playlist.routes.js";
+app.use("/api/v1/playlists", playlistRouter);
+
+// Dashboard/Channel routes
+import channelRouter from "./routes/channel.routes.js";
+app.use("/api/v1/channel", channelRouter);
+
 export default app;
