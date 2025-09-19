@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Video } from "../models/video.models.js";
 import { Subscription } from "../models/subscription.models.js";
-import { Like } from "../models/likes.models.js";
+import { Likes } from "../models/likes.models.js";
 import APIerror from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
@@ -11,7 +11,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const channelId = req.user._id; // assuming verifyJWT middleware sets req.user
 
     if (!mongoose.isValidObjectId(channelId)) {
-        throw new ApiError(400, "Invalid channel ID");
+        throw new APIerror(400, "Invalid channel ID");
     }
 
     // 1. Total videos
@@ -31,7 +31,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const userVideos = await Video.find({ owner: channelId }).select("_id");
     const videoIds = userVideos.map(v => v._id);
     const totalLikes = videoIds.length > 0 
-        ? await Like.countDocuments({ video: { $in: videoIds } }) 
+        ? await Likes.countDocuments({ video: { $in: videoIds } }) 
         : 0;
 
     return res.status(200).json(

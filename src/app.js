@@ -49,7 +49,7 @@ import playlistRouter from "./routes/playlist.routes.js";
 app.use("/api/v1/playlists", playlistRouter);
 
 // Dashboard/Channel routes
-import channelRouter from "./routes/channel.routes.js";
+import channelRouter from "./routes/channels.routes.js";
 app.use("/api/v1/channel", channelRouter);
 
 export default app;

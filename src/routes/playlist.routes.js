@@ -7,7 +7,7 @@ import {
     removeVideoFromPlaylist,
     deletePlaylist,
     updatePlaylist
-} from "../controllers/playlist.controllers.js";
+} from "../controllers/playlist.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
