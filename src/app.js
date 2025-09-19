@@ -32,4 +32,8 @@ app.use("/api/v1/comments", commentRouter);
 import tweetRouter from "./routes/tweeets.routes.js"
 app.use("/api/v1/tweets",tweetRouter)
 
+// Subscription routes
+import subscriptionRouter from "./routes/subscription.routes.js"
+app.use("/api/v1/subscriptions",subscriptionRouter)
+
 export default app;
