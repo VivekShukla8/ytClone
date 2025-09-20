@@ -89,4 +89,8 @@ userSchema.methods.generateRefreshToken = function (){
     )
 }
 
+// 👇 Add this line before exporting User
+userSchema.index({ username: "text", fullname: "text" });   // for searching logic
+
+
 export const User = mongoose.model("User",userSchema)

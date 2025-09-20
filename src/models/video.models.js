@@ -42,4 +42,8 @@ const videoSchema = new Schema(
 
 videoSchema.plugin(mongooseAggregatePaginate)        
 
+
+videoSchema.index({ title: "text", description: "text" });   // fir searching 
+
+
 export const Video = mongoose.model("Video",videoSchema)

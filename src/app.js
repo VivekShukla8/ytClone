@@ -52,4 +52,9 @@ app.use("/api/v1/playlists", playlistRouter);
 import channelRouter from "./routes/channels.routes.js";
 app.use("/api/v1/channel", channelRouter);
 
+// Search routes
+import searchRoutes from "./routes/search.routes.js";
+app.use("/api/v1/search", searchRoutes);
+
+
 export default app;
